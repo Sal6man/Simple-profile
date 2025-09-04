@@ -1,250 +1,804 @@
 <!DOCTYPE html>
-<html>
+<html lang="ar" dir="rtl">
 <head>
-  <title>My Personal Portfolio</title>
-  <style>
-    /* CSS styles go here */
-    body {
-      background-color: #1a1a1a;
-      font-family: Arial, sans-serif;
-      color: #ffffff;
-      margin: 0;
-      padding: 0;
-    }
-    
-    header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1;
-      background-color: #000000;
-      padding: 25px;
-      text-align: center;
-      border-radius: 5px;
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    }
-    
-    h1 {
-      font-size: 36px;
-      margin-bottom: 10px;
-      color: #ffffff;
-      margin: 0;
-    }
-    
-    .content {
-      margin: 250px auto 40px;
-      padding: 80px;
-      background-color: #262626;
-      border-radius: 20px;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-      text-align: center;
-      max-width: 1200px;
-      position: relative;
-    }
-    
-    .content p {
-      font-size: 18px;
-      line-height: 1.5;
-    }
-    
-    .profile-image {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-bottom: 20px;
-      position: absolute;
-      top: -75px;
-      right: -75px;
-      border: 5px solid #262626;
-    }
-    
-    .button-container {
-      margin-top: 20px;
-    }
-    
-    .button {
-      display: inline-block;
-      padding: 10px;
-      background-color: #262626;
-      color: #ffffff;
-      text-decoration: none;
-      border-radius: 20px;
-      transition: background-color 0.3s, transform 0.3s;
-      margin-right: 10px;
-      font-size: 16px;
-      font-weight: bold;
-      border: none;
-      outline: none;
-      cursor: pointer;
-      width: 40px;
-      height: 40px;
-      line-height: 40px;
-      text-align: center;
-    }
-    
-    .button img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 50%;
-    }
-    
-    .button:hover {
-      background-color: #333333;
-      transform: scale(1.05);
-    }
-    
-    .contact-header {
-      background-color: #000000;
-      padding: 15px;
-      text-align: right;
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      z-index: -1;
-      display: none;
-      font-size: 20px;
-    }
-    
-    .contact-button {
-      display: inline-block;
-      padding: 10px 20px;
-      background-color: #262626;
-      color: #ffffff;
-      text-decoration: none;
-      border-radius: 10px;
-      transition: background-color 0.3s, transform 0.3s;
-      margin-right: -1000px;
-      font-size: 16px;
-      font-weight: bold;
-      border: none;
-      outline: none;
-      cursor: pointer;
-    }
-    
-    .contact-button:hover {
-      background-color: #333333;
-      transform: scale(1.05);
-    }
-    
-    .contact-button-text {
-      display: inline-block;
-      color: #ffffff;
-      font-size: 16px;
-      font-weight: bold;
-      text-decoration: none;
-    }
-    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مقارنة أرامكو عبر التاريخ - من الملكية الأمريكية إلى السعودية</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    
-    .button.home {
-      background-color: #262626;
-      border-radius: 10px;
-      padding: 0px 20px;
-      font-size: 16px;
-      width: fixed;
-      height: fixed;
-      line-height: fixed;
-    }
-    
-    .button.home:hover::after {
-      opacity: 1;
-    }
-    
-    @keyframes fade-in {
-      0% {
-        opacity: 0;
-      }
-      100% {
-        opacity: 1;
-      }
-    }
-    
-    .fade-in {
-      animation: fade-in 1s ease-in-out;
-    }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 50%, #9b59b6 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
 
-    .button-name {
-      position: absolute;
-      bottom: 100%;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: rgba(0, 0, 0, 0.8);
-      padding: 5px 10px;
-      border-radius: 5px;
-      opacity: 0;
-      transition: opacity 0.3s;
-      pointer-events: none;
-      white-space: nowrap;
-    }
+        .container {
+            max-width: 1800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
 
-    .button-container .button:hover .button-name {
-      opacity: 1;
-    }
-  </style>
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 50px;
+            margin-bottom: 40px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, #e74c3c, #f39c12, #27ae60);
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #2c3e50, #3498db);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.4rem;
+            margin-top: 15px;
+            font-weight: 500;
+        }
+
+        /* Timeline Header */
+        .timeline-header {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .timeline-period {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border: 3px solid;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .timeline-period.american {
+            border-color: #e74c3c;
+        }
+
+        .timeline-period.transition {
+            border-color: #f39c12;
+        }
+
+        .timeline-period.saudi {
+            border-color: #27ae60;
+        }
+
+        .timeline-period:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .period-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .timeline-period.american .period-icon {
+            color: #e74c3c;
+        }
+
+        .timeline-period.transition .period-icon {
+            color: #f39c12;
+        }
+
+        .timeline-period.saudi .period-icon {
+            color: #27ae60;
+        }
+
+        .period-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        .period-years {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .period-description {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        /* Comparison Grid */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .comparison-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 40px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .comparison-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+        }
+
+        .comparison-section.american::before {
+            background: linear-gradient(90deg, #e74c3c, #c0392b);
+        }
+
+        .comparison-section.transition::before {
+            background: linear-gradient(90deg, #f39c12, #d68910);
+        }
+
+        .comparison-section.saudi::before {
+            background: linear-gradient(90deg, #27ae60, #229954);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .metric-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .metric-item:last-child {
+            border-bottom: none;
+        }
+
+        .metric-label {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+
+        .metric-value {
+            font-weight: bold;
+            color: #e74c3c;
+            font-size: 1.2rem;
+        }
+
+        .comparison-section.transition .metric-value {
+            color: #f39c12;
+        }
+
+        .comparison-section.saudi .metric-value {
+            color: #27ae60;
+        }
+
+        /* Charts Section */
+        .charts-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 50px;
+            margin-bottom: 50px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+        }
+
+        .charts-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, #9b59b6, #8e44ad);
+            border-radius: 30px 30px 0 0;
+        }
+
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        .chart-card {
+            background: rgba(248, 249, 250, 0.8);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .chart-title {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 400px;
+        }
+
+        /* Key Events Timeline */
+        .events-timeline {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 50px;
+            margin-bottom: 50px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+        }
+
+        .events-timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, #34495e, #2c3e50);
+            border-radius: 30px 30px 0 0;
+        }
+
+        .events-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .event-item {
+            background: rgba(248, 249, 250, 0.9);
+            border-radius: 15px;
+            padding: 25px;
+            border-left: 5px solid;
+            transition: all 0.3s ease;
+        }
+
+        .event-item.american {
+            border-left-color: #e74c3c;
+        }
+
+        .event-item.transition {
+            border-left-color: #f39c12;
+        }
+
+        .event-item.saudi {
+            border-left-color: #27ae60;
+        }
+
+        .event-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .event-year {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .event-description {
+            font-size: 1rem;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .timeline-header,
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            .comparison-section,
+            .charts-section,
+            .events-timeline {
+                padding: 25px;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .timeline-period,
+        .comparison-section,
+        .chart-card,
+        .event-item {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .timeline-period:nth-child(2) { animation-delay: 0.2s; }
+        .timeline-period:nth-child(3) { animation-delay: 0.4s; }
+        .comparison-section:nth-child(2) { animation-delay: 0.3s; }
+        .comparison-section:nth-child(3) { animation-delay: 0.6s; }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>My Personal Website</h1>
-    <a href="#" class="button home">Home</a>
-    <a href="#contact" class="contact-button">Contact</a>
-  </header>
-  
-  <div class="content">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLkNu6MhNMOu02871w6Xp2Lf2A9NiDtDyseA&s" alt="Profile Image" class="profile-image">
-    <h2>About Me</h2>
-    <p>Hello! I'm Salman, a web developer with a passion for creating modern and engaging websites. I have experience in C#, HTML, and CSS. I love developing games and fun stuff.</p>
-    
-    <div class="button-container">
-      <a href="https://steamcommunity.com/profiles/76561199107371374/" class="button">
-        <img src="https://static-00.iconduck.com/assets.00/steam-icon-512x512-ikdnzrl9.png" alt="Steam">
-        <span class="button-name">Steam</span>
-      </a>
-      <a href="https://Sl6mano.itch.io/" class="button">
-        <img src="https://cdn2.steamgriddb.com/file/sgdb-cdn/icon_thumb/8b33ab221257b074d1d967042ad1d9d0.png" alt="itch.io">
-        <span class="button-name">itch.io</span>
-      </a>
-      <a href="https://github.com/Sal6man" class="button">
-        <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub">
-        <span class="button-name">GitHub</span>
-      </a>
-      <a href="https://twitter.com/Sl6mano1" class="button">
-        <img src="https://png.pngtree.com/png-vector/20221018/ourmid/pngtree-twitter-social-media-round-icon-png-image_6315985.png" alt="Twitter">
-        <span class="button-name">Twitter</span>
-      </a>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>
+                <i class="fas fa-timeline"></i>
+                رحلة أرامكو عبر التاريخ
+            </h1>
+            <p>من الملكية الأمريكية إلى السيادة السعودية والاكتتاب العام</p>
+        </div>
+
+        <!-- Timeline Periods -->
+        <div class="timeline-header">
+            <div class="timeline-period american">
+                <div class="period-icon"><i class="fas fa-flag-usa"></i></div>
+                <div class="period-title">الحقبة الأمريكية</div>
+                <div class="period-years">1933 - 1980</div>
+                <div class="period-description">ملكية أمريكية كاملة، تأسيس وتطوير الشركة</div>
+            </div>
+
+            <div class="timeline-period transition">
+                <div class="period-icon"><i class="fas fa-exchange-alt"></i></div>
+                <div class="period-title">فترة التأميم</div>
+                <div class="period-years">1980 - 2019</div>
+                <div class="period-description">ملكية سعودية كاملة، نمو وتوسع</div>
+            </div>
+
+            <div class="timeline-period saudi">
+                <div class="period-icon"><i class="fas fa-chart-line"></i></div>
+                <div class="period-title">عصر الاكتتاب</div>
+                <div class="period-years">2019 - الآن</div>
+                <div class="period-description">طرح عام جزئي، شفافية مالية</div>
+            </div>
+        </div>
+
+        <!-- Comparison Grid -->
+        <div class="comparison-grid">
+            <!-- American Era -->
+            <div class="comparison-section american">
+                <h3 class="section-title">الحقبة الأمريكية (1933-1980)</h3>
+                
+                <div class="metric-item">
+                    <span class="metric-label">نوع الملكية</span>
+                    <span class="metric-value">أمريكية خاصة</span>
+                </div>
+                
+                <div class="metric-item">
+                    <span class="metric-label">الإنتاج اليومي</span>
+                    <span class="metric-value">~3 مليون برميل</span>
+                </div>
+                
+                <div class="metric-item">
+                    <span class="metric-label">الإيرادات السنوية</span>
+                    <span class="metric-value">~15 مليار دولار</span>
+                </div>
+                
+                <div class="metric-item">
+                    <span class="metric-label">عدد الموظفين</span>
+                    <span class="metric-value">~30,000</span>
+                </div>
+                
+                <div class="metric-item">
+                    <span class="metric-label">الشفافية المالية</span>
+                    <span class="metric-value">محدودة</span>
+                </div>
+                
+                <div class="metric-item">
+                    <span class="metric-label">التحكم في الأسعار</span>
+                    <span class="metric-value">أمريكي</span>
+                </div>
+                
+                <div class="metric-item">
+                    <span class="metric-label">الاستثمار في التطوير</span>
+                    <span class="metric-value">~2 مليار سنوياً</span>
+                </div>
+            </div>
+
+            <!-- Saudi Era -->
+            <div class="comparison-section transition">
+                <h3 class="section-title">العصر السعودي (1980-2019)</h3>
+                
+                <div class="metric-item">
+                    <span class="metric-label">نوع الملكية</span>
+                    <span class="metric-value">حكومية 100%</span>
+                </div>
+                
+                <div class="metric-item">
+                    <span class="metric-label">الإنتاج اليومي</span>
+                    <span class="metric-value">~10 مليون برميل</span>
+                </div>
+                
+                <div class="metric-item">
+                    <span class="metric-label">الإيرادات السنوية</span>
+                    <span class="metric-value">~200 مليار دولار</span>
+                </div>
+                
+                <div class="metric-item">
+                    <span class="metric-label">عدد الموظفين</span>
+                    <span class="metric-value">~65,000</span>
+                </div>
+                
+                <div class="metric-item">
+                    <span class="metric-label">الشفافية المالية</span>
+                    <span class="metric-value">داخلية فقط</span>
+                </div>
+                
+                <div class="metric-item">
+                    <span class="metric-label">التحكم في الأسعار</span>
+                    <span class="metric-value">سعودي - أوبك</span>
+                </div>
+                
+                <div class="metric-item">
+                    <span class="metric-label">الاستثمار في التطوير</span>
+                    <span class="metric-value">~25 مليار سنوياً</span>
+                </div>
+            </div>
+
+            <!-- Public Era -->
+            <div class="comparison-section saudi">
+                <h3 class="section-title">عصر الاكتتاب (2019-الآن)</h3>
+                
+                <div class="metric-item">
+                    <span class="metric-label">نوع الملكية</span>
+                    <span class="metric-value">97.6% حكومية</span>
+                </div>
+                
+                <div class="metric-item">
+                    <span class="metric-label">الإنتاج اليومي</span>
+                    <span class="metric-value">12.7 مليون برميل</span>
+                </div>
+                
+                <div class="metric-item">
+                    <span class="metric-label">الإيرادات السنوية</span>
+                    <span class="metric-value">477 مليار دولار</span>
+                </div>
+                
+                <div class="metric-item">
+                    <span class="metric-label">عدد الموظفين</span>
+                    <span class="metric-value">75,000+</span>
+                </div>
+                
+                <div class="metric-item">
+                    <span class="metric-label">الشفافية المالية</span>
+                    <span class="metric-value">تقارير ربع سنوية</span>
+                </div>
+                
+                <div class="metric-item">
+                    <span class="metric-label">القيمة السوقية</span>
+                    <span class="metric-value">1.55 تريليون دولار</span>
+                </div>
+                
+                <div class="metric-item">
+                    <span class="metric-label">الاستثمار السنوي</span>
+                    <span class="metric-value">53+ مليار دولار</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="charts-section">
+            <h2 class="section-title">المقارنات البيانية عبر الحقب</h2>
+            
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <h4 class="chart-title">نمو الإنتاج عبر العقود</h4>
+                    <div class="chart-container">
+                        <canvas id="productionChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <h4 class="chart-title">تطور الإيرادات السنوية</h4>
+                    <div class="chart-container">
+                        <canvas id="revenueHistoryChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <h4 class="chart-title">توزيع الملكية عبر الزمن</h4>
+                    <div class="chart-container">
+                        <canvas id="ownershipChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <h4 class="chart-title">مقارنة الاستثمارات السنوية</h4>
+                    <div class="chart-container">
+                        <canvas id="investmentChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Events Timeline -->
+        <div class="events-timeline">
+            <h2 class="section-title">الأحداث المحورية في تاريخ أرامكو</h2>
+            
+            <div class="events-list">
+                <div class="event-item american">
+                    <div class="event-year">1933</div>
+                    <div class="event-description">منح امتياز التنقيب عن النفط لشركة ستاندرد أويل الأمريكية</div>
+                </div>
+
+                <div class="event-item american">
+                    <div class="event-year">1938</div>
+                    <div class="event-description">اكتشاف النفط في بئر دمام رقم 7 - بداية العصر النفطي</div>
+                </div>
+
+                <div class="event-item american">
+                    <div class="event-year">1944</div>
+                    <div class="event-description">تغيير اسم الشركة إلى شركة الزيت العربية الأمريكية (أرامكو)</div>
+                </div>
+
+                <div class="event-item transition">
+                    <div class="event-year">1973</div>
+                    <div class="event-description">بداية التأميم - الحكومة السعودية تحصل على 25% من الشركة</div>
+                </div>
+
+                <div class="event-item transition">
+                    <div class="event-year">1980</div>
+                    <div class="event-description">الاستحواذ الكامل - السعودية تملك 100% من أرامكو</div>
+                </div>
+
+                <div class="event-item transition">
+                    <div class="event-year">1988</div>
+                    <div class="event-description">إعادة تسمية الشركة رسمياً إلى أرامكو السعودية</div>
+                </div>
+
+                <div class="event-item saudi">
+                    <div class="event-year">2019</div>
+                    <div class="event-description">الطرح العام الأولي - أكبر اكتتاب في التاريخ بقيمة 29.4 مليار دولار</div>
+                </div>
+
+                <div class="event-item saudi">
+                    <div class="event-year">2024</div>
+                    <div class="event-description">طرح إضافي بقيمة 11.2 مليار دولار - تعزيز الشفافية المالية</div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-  
-  <div class="contact-header fade-in" id="contact">
-    <a href="#" class="contact-button-text">Contact</a>
-  </div>
-  
-  <script>
-    const contactButton = document.querySelector('.contact-button');
-    const contactHeader = document.querySelector('.contact-header');
-    const homeButton = document.querySelector('.button.home');
 
-    contactButton.addEventListener('click', () => {
-      contactHeader.style.display = 'block';
-    });
+    <script>
+        // Production Growth Chart
+        const productionCtx = document.getElementById('productionChart').getContext('2d');
+        new Chart(productionCtx, {
+            type: 'line',
+            data: {
+                labels: ['1940s', '1960s', '1980s', '2000s', '2020s'],
+                datasets: [{
+                    label: 'الإنتاج اليومي (مليون برميل)',
+                    data: [0.5, 2.5, 6.5, 9.5, 12.7],
+                    borderColor: '#e74c3c',
+                    backgroundColor: 'rgba(231, 76, 60, 0.1)',
+                    borderWidth: 4,
+                    fill: true,
+                    tension: 0.4,
+                    pointBackgroundColor: ['#e74c3c', '#e74c3c', '#f39c12', '#27ae60', '#27ae60'],
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 3,
+                    pointRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 15,
+                        grid: {
+                            color: 'rgba(0,0,0,0.1)'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
 
-    homeButton.addEventListener('click', () => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    });
+        // Revenue History Chart
+        const revenueCtx = document.getElementById('revenueHistoryChart').getContext('2d');
+        new Chart(revenueCtx, {
+            type: 'bar',
+            data: {
+                labels: ['الحقبة الأمريكية', 'العصر السعودي', 'عصر الاكتتاب'],
+                datasets: [{
+                    label: 'متوسط الإيرادات السنوية (مليار دولار)',
+                    data: [15, 200, 450],
+                    backgroundColor: ['#e74c3c', '#f39c12', '#27ae60'],
+                    borderRadius: 10,
+                    borderWidth: 2,
+                    borderColor: ['#c0392b', '#d68910', '#229954']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 500,
+                        grid: {
+                            color: 'rgba(0,0,0,0.1)'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
 
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 100) {
-        contactHeader.style.display = 'block';
-      } else {
-        contactHeader.style.display = 'none';
-      }
-    });
-  </script>
+        // Ownership Chart
+        const ownershipCtx = document.getElementById('ownershipChart').getContext('2d');
+        new Chart(ownershipCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['الحكومة السعودية', 'صندوق الاستثمار العام', 'المستثمرون العامون'],
+                datasets: [{
+                    data: [82.2, 16, 1.8],
+                    backgroundColor: ['#27ae60', '#f39c12', '#3498db'],
+                    borderWidth: 0,
+                    cutout: '60%'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            usePointStyle: true,
+                            padding: 20
+                        }
+                    }
+                }
+            }
+        });
+
+        // Investment Chart
+        const investmentCtx = document.getElementById('investmentChart').getContext('2d');
+        new Chart(investmentCtx, {
+            type: 'radar',
+            data: {
+                labels: ['التطوير', 'التكنولوجيا', 'التوسع', 'البحث', 'الاستدامة'],
+                datasets: [{
+                    label: 'الحقبة الأمريكية',
+                    data: [3, 2, 4, 2, 1],
+                    borderColor: '#e74c3c',
+                    backgroundColor: 'rgba(231, 76, 60, 0.2)',
+                }, {
+                    label: 'العصر السعودي',
+                    data: [7, 6, 8, 5, 4],
+                    borderColor: '#f39c12',
+                    backgroundColor: 'rgba(243, 156, 18, 0.2)',
+                }, {
+                    label: 'عصر الاكتتاب',
+                    data: [9, 9, 9, 8, 8],
+                    borderColor: '#27ae60',
+                    backgroundColor: 'rgba(39, 174, 96, 0.2)',
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        beginAtZero: true,
+                        max: 10
+                    }
+                }
+            }
+        });
+
+        // Add interactive effects
+        document.querySelectorAll('.timeline-period').forEach(period => {
+            period.addEventListener('click', function() {
+                // Remove active class from all
+                document.querySelectorAll('.timeline-period').forEach(p => p.classList.remove('active'));
+                // Add active class to clicked
+                this.classList.add('active');
+                
+                // Visual feedback
+                this.style.transform = 'translateY(-15px) scale(1.05)';
+                setTimeout(() => {
+                    this.style.transform = 'translateY(-10px)';
+                }, 200);
+            });
+        });
+
+        console.log('مقارنة أرامكو التاريخية جاهزة!');
+    </script>
 </body>
 </html>
